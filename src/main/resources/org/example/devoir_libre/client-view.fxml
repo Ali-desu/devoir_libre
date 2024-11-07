@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Button?>
+
+<?import javafx.collections.FXCollections?>
+
+<?import com.sun.org.apache.xpath.internal.operations.String?>
+<?import org.example.devoir_libre.models.Devise?>
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.devoir_libre.controllers.ClientController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <!-- Client Name -->
+    <TextField fx:id="nomField" promptText="Enter Name"/>
+
+    <!-- Client Surname -->
+    <TextField fx:id="prenomField" promptText="Enter Surname"/>
+
+    <!-- Client Address -->
+    <TextField fx:id="adresseField" promptText="Enter Address"/>
+
+    <!-- Client Phone -->
+    <TextField fx:id="phoneField" promptText="Enter Phone"/>
+
+    <!-- Client Email -->
+    <TextField fx:id="emailField" promptText="Enter Email"/>
+
+    <!-- Currency ComboBox -->
+    <ComboBox fx:id="deviseComboBox" promptText="Select Currency">
+
+    </ComboBox>
+
+
+    <!-- Date of Account Creation -->
+    <DatePicker fx:id="dateCreationField" promptText="Select Creation Date"/>
+
+    <!-- Add Client Button -->
+    <Button text="Add Client" onAction="#handleAddClient"/>
+
+    <!-- Confirmation Message -->
+    <Label fx:id="messageLabel"/>
+
+
+
+</VBox>
