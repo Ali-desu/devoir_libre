@@ -15,11 +15,11 @@ import java.util.List;
 @Setter
 
 public class Transaction {
-    private TransactionType type;
-    private Date timeStamp;
-    private String reference;
-    private List<Compte> comptes = new ArrayList<>();
-
+    private TransactionType type; // Transaction type
+    private Compte sourceCompte;  // Account from which money is being sent
+    private Compte destinationCompte;  // Account to which money is being sent
+    private double amount;  // The amount of the transaction
+    private Date transactionDate;
 }
 
 enum TransactionType {

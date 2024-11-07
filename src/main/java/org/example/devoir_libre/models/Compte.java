@@ -2,6 +2,7 @@ package org.example.devoir_libre.models;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -12,10 +13,13 @@ import java.util.Date;
 
 public class Compte {
     private int numCompte;
+    private double solde;
     private Date dateCreation;
     private Date dateUpdate;
     private Devise devise;
     private Banque banque;
+    private Client client;
+    private ArrayList<Transaction> transactions;
 
     @Override
     public String toString() {

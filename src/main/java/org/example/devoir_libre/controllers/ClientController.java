@@ -27,22 +27,10 @@ public class ClientController {
     private TextField phoneField;     // For client phone input
     @FXML
     private TextField emailField;     // For client email input
-
-    @FXML
-    private ComboBox<Devise> deviseComboBox; // For selecting currency
-    @FXML
-    private DatePicker dateCreationField;    // For selecting account creation date
-
-    @FXML
-    private Button addClientButton;           // Button to add client
-
     @FXML
     private Label messageLabel;               // For displaying the confirmation message
 
-    public void initialize() {
-        // Populate the ComboBox with Devise enum values
-        deviseComboBox.setItems(FXCollections.observableArrayList(Devise.values()));
-    }
+
 
     // This method will be called when the "Add Client" button is clicked
     @FXML
@@ -54,10 +42,8 @@ public class ClientController {
         String phone = phoneField.getText();
         String email = emailField.getText();
 
-        Devise devise = deviseComboBox.getValue();
-        Date dateCreation = java.sql.Date.valueOf(dateCreationField.getValue());  // Convert DatePicker to Date
 
-        if (nom.isEmpty() || prenom.isEmpty() || adresse.isEmpty() || phone.isEmpty() || email.isEmpty() || devise == null || dateCreation == null) {
+        if (nom.isEmpty() || prenom.isEmpty() || adresse.isEmpty() || phone.isEmpty() || email.isEmpty()) {
             messageLabel.setText("Please fill out all fields.");
             return;
         }
@@ -70,13 +56,6 @@ public class ClientController {
         newClient.setPhone(phone);
         newClient.setEmail(email);
         newClient.setComptes(new ArrayList<>());
-
-        // Now create a new Compte for the client
-        Banque banque = new Banque(); // You should define this class, assuming it's defined somewhere
-        banque.setPays("Some Country"); // Set the country for the bank (or use a real value)
-
-        Compte newCompte = new Compte(1, new Date(), new Date(), devise, banque); // Creating a new account
-        newClient.ajouterCompte(newCompte); // Adding the account to the client
 
         // Simulate saving to a database or list (in this case, we just show a confirmation)
         messageLabel.setText("Client Added Successfully!");
@@ -92,7 +71,5 @@ public class ClientController {
         adresseField.clear();
         phoneField.clear();
         emailField.clear();
-        deviseComboBox.getSelectionModel().clearSelection();
-        dateCreationField.setValue(null);
     }
 }

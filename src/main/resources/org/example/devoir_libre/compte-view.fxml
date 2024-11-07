@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+
+<VBox alignment="CENTER" spacing="10.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.devoir_libre.controllers.CompteController">
+
+
+        <!-- Date Creation -->
+        <Label text="Date de Création"/>
+        <DatePicker fx:id="dateCreationPicker"/>
+
+        <!-- Devise Enum Selection -->
+        <Label text="Devise"/>
+        <ComboBox fx:id="deviseComboBox" promptText="Sélectionnez une devise"/>
+
+        <!-- Bank ID Field -->
+        <Label text="ID de la Banque"/>
+        <TextField fx:id="bankIdField" promptText="Entrez l'ID de la banque"/>
+
+        <!-- Client ID Field -->
+        <Label text="ID du Client"/>
+        <TextField fx:id="clientIdField" promptText="Entrez l'ID du client"/>
+
+        <!-- Submit Button -->
+        <Button text="Ajouter Compte" onAction="#handleAddCompte"/>
+
+</VBox>

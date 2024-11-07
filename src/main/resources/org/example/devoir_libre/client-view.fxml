@@ -33,14 +33,6 @@
     <!-- Client Email -->
     <TextField fx:id="emailField" promptText="Enter Email"/>
 
-    <!-- Currency ComboBox -->
-    <ComboBox fx:id="deviseComboBox" promptText="Select Currency">
-
-    </ComboBox>
-
-
-    <!-- Date of Account Creation -->
-    <DatePicker fx:id="dateCreationField" promptText="Select Creation Date"/>
 
     <!-- Add Client Button -->
     <Button text="Add Client" onAction="#handleAddClient"/>

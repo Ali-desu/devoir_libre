@@ -17,5 +17,5 @@
 
     <!-- Button to open the client creation form -->
     <Button fx:id="btnScene1" text="Create New Client" onAction="#openClientForm"/>
-
+    <Button fx:id="btnScene2" text="Create New account" onAction="#openAccountForm"/>
 </VBox>
