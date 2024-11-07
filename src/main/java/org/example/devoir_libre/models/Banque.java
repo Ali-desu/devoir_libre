@@ -1,7 +1,11 @@
 package org.example.devoir_libre.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
+import org.example.devoir_libre.JsonConverter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @AllArgsConstructor
@@ -9,7 +13,9 @@ import java.util.ArrayList;
 @Getter
 @Setter
 public class Banque {
-    private ArrayList<Compte> comptes; // List of comptes in this bank
+    @JsonBackReference
+    private ArrayList<Compte> comptes;
+
     private int id;
     private String pays;
 
@@ -24,6 +30,11 @@ public class Banque {
             comptes = new ArrayList<>();
         }
         comptes.add(compte);
+    }
+
+    // Convertir un objet Client en JSON
+    public String toJson() {
+        return JsonConverter.toJson(this);
     }
 
     @Override

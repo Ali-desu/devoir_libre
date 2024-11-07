@@ -1,10 +1,14 @@
 package org.example.devoir_libre.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.IOException;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -13,10 +17,17 @@ import java.util.Date;
 @Setter
 public class Transaction {
     private int idTransaction;
+    @JsonBackReference
     private Compte sourceAccount;
+
+    @JsonBackReference
     private Compte destinationAccount;
+
     private double amount;
-    private Date transactionDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date transactionDate;  // Jackson will automatically handle this date format
+
     private TransactionType type;
 
     @Override
@@ -29,6 +40,12 @@ public class Transaction {
                 ", type=" + type +
                 '}';
     }
+
+    public static String toJson(Compte compte) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(compte);
+    }
+
 }
 
 enum TransactionType {

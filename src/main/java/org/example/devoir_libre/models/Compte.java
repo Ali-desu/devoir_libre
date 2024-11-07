@@ -1,10 +1,14 @@
 package org.example.devoir_libre.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.Setter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,11 +19,19 @@ import java.util.Date;
 public class Compte {
     private int numCompte;
     private double solde;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateCreation;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateUpdate;
+
     private Devise devise;
     private Banque banque;
+
+    @JsonBackReference
     private Client client;
+
     private ArrayList<Transaction> transactions = new ArrayList<>();
 
     @Override
@@ -68,5 +80,17 @@ public class Compte {
         if (sameCountry) return TransactionType.VIREST;
         if (sameBank) return TransactionType.VIRINI;
         return TransactionType.VIRCHAC;
+    }
+
+    // Convertir un objet Compte en JSON
+    public static String toJson(Compte compte) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(compte);
+    }
+
+    // Convertir un JSON en objet Compte
+    public static Compte fromJson(String json) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(json, Compte.class);
     }
 }

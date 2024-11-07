@@ -1,47 +1,39 @@
 package org.example.devoir_libre;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.devoir_libre.models.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class TransactionTest {
 
     public static void main(String[] args) {
-        // Create bank instances for testing
-        Banque banque1 = new Banque(1,  "USA ");
-        Banque banque2 = new Banque(2, "USA");
+        // 1. Create instances of the relevant classes
+        Banque banque1 = new Banque(1, "USA");
+        Banque banque2 = new Banque(2, "Canada");
 
-        // Create client instances
-        Client client1 = new Client(1, "John Doe");
-        Client client2 = new Client(2, "Jane Smith");
+        // Creating a client and assigning comptes to them
+        Client client1 = new Client(1, "John");
+        Client client2 = new Client(2, "Jane");
 
-        // Create accounts with initial balances
-        Compte compte1 = new Compte(1, 1000.0, new Date(), null, Devise.MAD, banque1, client1, new ArrayList<>());
-        Compte compte2 = new Compte(2, 500.0, new Date(), null, Devise.USD, banque2, client2, new ArrayList<>());
+        Compte compte1 = new Compte(1, 5000.0, new Date(), new Date(), Devise.MAD, banque1, client1, new ArrayList<>());
+        Compte compte2 = new Compte(2, 3000.0, new Date(), new Date(), Devise.USD, banque2, client2, new ArrayList<>());
+        banque1.addCompte(compte1);
+        banque2.addCompte(compte2);
 
-        // Display initial balances
-        System.out.println("Initial Balances:");
-        System.out.println("Compte1 (Client 1) Balance: " + compte1.getSolde());
-        System.out.println("Compte2 (Client 2) Balance: " + compte2.getSolde());
+        // 2. Create a Transaction between the two comptes
+        boolean transactionSuccessful = compte1.makeTransaction(compte2, 1000.0);
+        System.out.println("Transaction success: " + transactionSuccessful);
 
-        // Test transaction between compte1 and compte2
-        System.out.println("\nPerforming Transaction of 200.0 from Compte1 to Compte2...");
-        boolean transactionSuccess = compte1.makeTransaction(compte2, 200.0);
+        String clientJson = JsonConverter.toJson(client1);
+        String banqueJson = JsonConverter.toJson(banque1);
+        String transactionJson = JsonConverter.toJson(compte1.getTransactions().getFirst());
 
-        if (transactionSuccess) {
-            // Display transaction details
-            System.out.println("\nTransaction Details:");
-            System.out.println("Compte1 Transactions: " + compte1.getTransactions());
-            System.out.println("Compte2 Transactions: " + compte2.getTransactions());
+        System.out.println("Client JSON: " + clientJson);
+        System.out.println("Banque JSON: " + banqueJson);
+        System.out.println("Transaction JSON: " + transactionJson);
 
-            // Display updated balances
-            System.out.println("\nUpdated Balances:");
-            System.out.println("Compte1 (Client 1) Balance: " + compte1.getSolde());
-            System.out.println("Compte2 (Client 2) Balance: " + compte2.getSolde());
-        } else {
-            System.out.println("Transaction failed due to insufficient balance.");
-        }
     }
 }
-

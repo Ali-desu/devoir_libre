@@ -1,12 +1,11 @@
 package org.example.devoir_libre.models;
 
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.devoir_libre.JsonConverter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,36 +15,31 @@ import java.util.List;
 @Getter
 @Setter
 public class Client {
-
-    // Private fields for encapsulation
     private int numClient;
     private String nom;
     private String prenom;
     private String adresse;
     private String phone;
     private String email;
-    private List<Compte> comptes ;
+
+    @JsonManagedReference
+    private List<Compte> comptes;
 
     public Client(int id, String nom) {
         this.numClient = id;
         this.nom = nom;
+        this.comptes = new ArrayList<>(); // Initialize the list to avoid null pointer exceptions
     }
 
-    // Static utility method to convert a Client object to JSON
-    public static String toJson(Client client) {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.create();
-        return gson.toJson(client);
+    public String toJson() {
+        return JsonConverter.toJson(this);
     }
 
-    // Static utility method to convert JSON string to Client object
+    // Convertir un JSON en objet Client
     public static Client fromJson(String json) {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.create();
-        return gson.fromJson(json, Client.class);
+        return JsonConverter.fromJson(json, Client.class);
     }
 
-    // Instance method to display client info
     public void displayInfo() {
         System.out.println("Nom: " + this.nom);
         System.out.println("Prenom: " + this.prenom);
@@ -54,13 +48,7 @@ public class Client {
         System.out.println("Email: " + this.email);
     }
 
-    // Instance method to add a compte to the client's comptes list
     public void ajouterCompte(Compte compte) {
         this.comptes.add(compte);
     }
-
-    public static void main(String[] args) {
-
-    }
 }
-
