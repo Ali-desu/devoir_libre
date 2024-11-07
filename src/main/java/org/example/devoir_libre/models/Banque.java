@@ -13,6 +13,11 @@ public class Banque {
     private int id;
     private String pays;
 
+    public Banque(int id, String pays) {
+        this.id = id;
+        this.pays = pays;
+    }
+
     // Method to add a Compte to the banque's list
     public void addCompte(Compte compte) {
         if (comptes == null) {

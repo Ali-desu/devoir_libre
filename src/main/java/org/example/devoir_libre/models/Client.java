@@ -26,6 +26,11 @@ public class Client {
     private String email;
     private List<Compte> comptes ;
 
+    public Client(int id, String nom) {
+        this.numClient = id;
+        this.nom = nom;
+    }
+
     // Static utility method to convert a Client object to JSON
     public static String toJson(Client client) {
         GsonBuilder gsonBuilder = new GsonBuilder();

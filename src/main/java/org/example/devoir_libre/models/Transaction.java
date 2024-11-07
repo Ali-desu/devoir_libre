@@ -5,26 +5,35 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-
 public class Transaction {
-    private TransactionType type; // Transaction type
-    private Compte sourceCompte;  // Account from which money is being sent
-    private Compte destinationCompte;  // Account to which money is being sent
-    private double amount;  // The amount of the transaction
+    private int idTransaction;
+    private Compte sourceAccount;
+    private Compte destinationAccount;
+    private double amount;
     private Date transactionDate;
+    private TransactionType type;
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "idTransaction=" + idTransaction +
+                ", sourceAccount=" + sourceAccount.getNumCompte() +
+                ", destinationAccount=" + destinationAccount.getNumCompte() +
+                ", amount=" + amount +
+                ", type=" + type +
+                '}';
+    }
 }
 
 enum TransactionType {
-    VIRINI,
-    VIREST,
-    VIRMULTA,
-    VIRCHAC
+    VIRMULTA, // Same country, same bank
+    VIREST,   // Same country, different bank
+    VIRINI,   // Different country, same bank
+    VIRCHAC   // Different country, different bank
 }

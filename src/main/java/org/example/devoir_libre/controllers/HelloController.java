@@ -22,7 +22,7 @@ public class HelloController {
     }
 
     @FXML
-    Button btnScene1 , btnScene2;
+    Button btnScene1 , btnScene2 , btnScene3 ;
 
 
     public void openClientForm() throws IOException {
@@ -35,6 +35,13 @@ public class HelloController {
     public void openAccountForm() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("compte-view.fxml"));
         Stage window = (Stage) btnScene2.getScene().getWindow();
+
+        window.setScene(new Scene(fxmlLoader.load(), 600, 400));
+    }
+
+    public void openTransactionForm() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("transaction-view.fxml"));
+        Stage window = (Stage) btnScene3.getScene().getWindow();
 
         window.setScene(new Scene(fxmlLoader.load(), 600, 400));
     }
